@@ -43,13 +43,37 @@ class BinaryTree():
             return None
         quene=list()
         quene.append(self)
+        count=0
         while quene:
             node=quene.pop(0)
             print(node.root)
+            count+=1
             if node.leftchild is not None:
                 quene.append(node.leftchild)
             if node.rightchild is not None:
                 quene.append(node.rightchild)
+        print(count)
+    def depth_node(self,node):
+        if node is None:
+            return 0
+        d1=self.depth_node(node.leftchild)
+        d2=self.depth_node(node.rightchild)
+        return max(d1,d2)+1
+    def preorder_bypostandin(self,inorder_list,postorder_list):
+        if not postorder_list:
+            return None
+        print(inorder_list)
+        print(postorder_list)
+        root=BinaryTree(postorder_list[-1])
+        print(postorder_list[-1])
+        in_root_index=inorder_list.index(postorder_list[-1])
+        root.leftchild=self.preorder_bypostandin(inorder_list[0:in_root_index],postorder_list[0:in_root_index])
+        root.rightchild=self.preorder_bypostandin(inorder_list[in_root_index+1:],postorder_list[in_root_index:-1])
+        #print(root)
+        return root
+        
+
+
 
 if __name__=='__main__':
     tree_one=BinaryTree('a')
@@ -65,5 +89,11 @@ if __name__=='__main__':
     tree_one.postorder()
     print("breadth_travel")
     tree_one.breadth_travel()
-        
+    print("depth_node")
+    max_depth=tree_one.depth_node(tree_one)
+    print(max_depth)
+    print("preorder_bypostandin")
+    inorder_list_demo=['4','2','b','3','a','1']
+    postorder_list_demo=['4','2','3','b','1','a']
+    tree_one.preorder_bypostandin(inorder_list_demo,postorder_list_demo)
   
