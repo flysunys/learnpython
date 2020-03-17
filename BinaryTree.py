@@ -38,6 +38,18 @@ class BinaryTree():
         if self.rightchild is not None:
             self.rightchild.postorder()
         print(self.root)
+    def breadth_travel(self):
+        if self is None:
+            return None
+        quene=list()
+        quene.append(self)
+        while quene:
+            node=quene.pop(0)
+            print(node.root)
+            if node.leftchild is not None:
+                quene.append(node.leftchild)
+            if node.rightchild is not None:
+                quene.append(node.rightchild)
 
 if __name__=='__main__':
     tree_one=BinaryTree('a')
@@ -51,5 +63,7 @@ if __name__=='__main__':
     tree_one.inorder()
     print("postorder")
     tree_one.postorder()
+    print("breadth_travel")
+    tree_one.breadth_travel()
         
   
