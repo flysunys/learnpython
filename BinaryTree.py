@@ -71,6 +71,26 @@ class BinaryTree():
         root.rightchild=self.preorder_bypostandin(inorder_list[in_root_index+1:],postorder_list[in_root_index:-1])
         #print(root)
         return root
+    def postorder_bypreandin(self,inorder_list,preorder_list):
+        if not preorder_list:
+            return None
+        print(inorder_list)
+        print(preorder_list)
+        root=BinaryTree(preorder_list[0])
+        print(preorder_list[0])
+        in_root_index=inorder_list.index(preorder_list[0])
+        root.leftchild=self.postorder_bypreandin(inorder_list[0:in_root_index],preorder_list[1:in_root_index+1])
+        root.rightchild=self.postorder_bypreandin(inorder_list[in_root_index+1:],preorder_list[in_root_index+1:])
+        #print(root)
+        return root
+    def preorder_two(self):
+        if self is None:
+            return None
+        print(self.root,end=" ")   #输出不换行
+        if self.leftchild is not None:
+            self.leftchild.preorder_two()
+        if self.rightchild is not None:
+            self.rightchild.preorder_two()
         
 
 
@@ -95,5 +115,15 @@ if __name__=='__main__':
     print("preorder_bypostandin")
     inorder_list_demo=['4','2','b','3','a','1']
     postorder_list_demo=['4','2','3','b','1','a']
-    tree_one.preorder_bypostandin(inorder_list_demo,postorder_list_demo)
+    root_all_nodes=tree_one.preorder_bypostandin(inorder_list_demo,postorder_list_demo)
+    print("preorder all nodes")
+    root_all_nodes.preorder_two()
+    print("postorder_bypreandin")
+    inorder_list_demo=['4','2','b','3','a','1']
+    preorder_list_demo=['a','b','2','4','3','1']
+    root_all_nodes=tree_one.postorder_bypreandin(inorder_list_demo,preorder_list_demo)
+    print("postorder all nodes")
+    root_all_nodes.postorder()
+    
+    
   
