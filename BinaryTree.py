@@ -91,6 +91,14 @@ class BinaryTree():
             self.leftchild.preorder_two()
         if self.rightchild is not None:
             self.rightchild.preorder_two()
+    def preorder_res(self,result_list):
+        if self is None:
+            return None
+        result_list.append(self.root)   #输出集成到一个list
+        if self.leftchild is not None:
+            self.leftchild.preorder_res(result_list)
+        if self.rightchild is not None:
+            self.rightchild.preorder_res(result_list)
         
 
 
@@ -103,6 +111,13 @@ if __name__=='__main__':
         tree_one.insertLeft(i)
     print("preorder")
     tree_one.preorder()
+    print("preorder_res")
+    res=list()
+    tree_one.preorder_res(res)
+    print("res is",res)
+    str_res=''.join(res)
+    str_res_a=str_res.strip()
+    print(str_res_a)
     print("inorder")
     tree_one.inorder()
     print("postorder")
